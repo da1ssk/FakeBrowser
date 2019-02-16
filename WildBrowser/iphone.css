@@ -1,0 +1,9 @@
+*{
+margin:10;
+padding:10;
+}
+li{ list-style-type:circle;}
+body{
+line-height:1.8;
+font-size:80%;
+}
