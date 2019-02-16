@@ -221,7 +221,7 @@ extern int nLaunch;
 	NSURL *url;
 	
 	if (isConnected) {
-		url = [NSURL URLWithString:@""];	// FIXME: add github page
+		url = [NSURL URLWithString:@"https://da1ssk.github.io/wildbrowser/index.html"];
 	} else {
 		url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"]];
 	}
