@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'WildBrowser' target in the 'WildBrowser' project
+// Prefix header for all source files of the 'FakeBrowser' target in the 'FakeBrowser' project
 //
 
 #import <Availability.h>

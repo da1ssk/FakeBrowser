@@ -1,6 +1,6 @@
 //
 //  MainViewController.m
-//  WildBrowser
+//  FakeBrowser
 //
 //  Created by Sasaki Daichi on 12/07/26.
 //  Copyright (c) 2012年 Sasaki Daichi. All rights reserved.
@@ -13,7 +13,7 @@
 #import <Twitter/TWTweetComposeViewController.h>
 #import <StoreKit/StoreKit.h>
 
-#define WILDBROWSER_HOMEPAGE @"https://da1ssk.github.io/wildbrowser/index.html"
+#define FAKEBROWSER_HOMEPAGE @"https://da1ssk.github.io/fakebrowser/index.html"
 
 MBProgressHUD *HUD;
 NSFileManager *fm;
@@ -53,7 +53,7 @@ extern int nLaunch;
 	[fm createDirectoryAtPath:savePath withIntermediateDirectories:YES attributes:nil error:nil];
 
 	// load dictionary
-	NSString* dicpath = [[NSBundle mainBundle] pathForResource:@"wild" ofType:@"txt"];
+	NSString* dicpath = [[NSBundle mainBundle] pathForResource:@"fake" ofType:@"txt"];
 	NSString *dictionary = [NSString stringWithContentsOfFile:dicpath encoding:NSUTF8StringEncoding error:nil];
 	NSArray *tmpDicArray = [dictionary componentsSeparatedByString:@"\n"];
 	
@@ -168,7 +168,7 @@ extern int nLaunch;
 	NSString *text = convertedTextView.text;
 
 	if(NSClassFromString(@"UIActivityViewController")) {
-		NSString *shareText = [NSString stringWithFormat:@"ワイルドコンバーター！ %@ %@", WILDBROWSER_HOMEPAGE, text];
+		NSString *shareText = [NSString stringWithFormat:@"Fake Browser %@ %@", FAKEBROWSER_HOMEPAGE, text];
 		NSArray *activityItems = @[shareText];
 
 		UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
@@ -222,7 +222,7 @@ extern int nLaunch;
 	NSURL *url;
 	
 	if (isConnected) {
-		url = [NSURL URLWithString:WILDBROWSER_HOMEPAGE];
+		url = [NSURL URLWithString:FAKEBROWSER_HOMEPAGE];
 	} else {
 		url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"]];
 	}
@@ -411,7 +411,7 @@ NSTimer *loadProductTimer;
 		}];
 
 	} else {
-		UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"" message:@"ワイルドコンバーター、気に入っただろぉ〜。5つ星よろしくだぜぇ〜。" delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"ワイルドだろぉ〜", nil];
+		UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"" message:@"Fake Browser、気に入っただろぉ〜。5つ星よろしくだぜぇ〜。" delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"ワイルドだろぉ〜", nil];
 		av.tag = ALERT_RATE;
 		[av show];
 	}
@@ -422,7 +422,7 @@ NSTimer *loadProductTimer;
 	if (HUD) {
 		[HUD hide:YES];
 
-		UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"" message:@"ワイルドコンバーター、気に入っただろぉ〜。5つ星よろしくだぜぇ〜。" delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"ワイルドだろぉ〜", nil];
+		UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"" message:@"Fake Browser、気に入っただろぉ〜。5つ星よろしくだぜぇ〜。" delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"ワイルドだろぉ〜", nil];
 		av.tag = ALERT_RATE;
 		[av show];
 	}
@@ -436,7 +436,7 @@ NSTimer *loadProductTimer;
 
     if (alertView.tag == ALERT_RATE) {
 		if (buttonIndex == 1)
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:WILDBROWSER_HOMEPAGE]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:FAKEBROWSER_HOMEPAGE]];
 	}
 }
 
@@ -453,7 +453,7 @@ NSTimer *loadProductTimer;
 	UIImage *image = [self captureView:webView];
 
 	if(NSClassFromString(@"UIActivityViewController")) {
-		NSString *shareText = [NSString stringWithFormat:@"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。%@ ", WILDBROWSER_HOMEPAGE];
+		NSString *shareText = [NSString stringWithFormat:@"Fake Browser %@ ", FAKEBROWSER_HOMEPAGE];
 		NSArray *activityItems = @[image, shareText];
 
 		UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
@@ -512,7 +512,7 @@ NSTimer *loadProductTimer;
 }
 
 -(void) tweetImage {
-	NSString *shareText = [NSString stringWithFormat:@"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。%@ ", WILDBROWSER_HOMEPAGE];
+	NSString *shareText = [NSString stringWithFormat:@"Fake Browser %@ ", FAKEBROWSER_HOMEPAGE];
 	
 	TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
 	[tweetViewController setInitialText:[NSString stringWithFormat:shareText]];
@@ -533,7 +533,7 @@ NSTimer *loadProductTimer;
 }
 
 -(void) tweetText{
-	NSString *shareText = [NSString stringWithFormat:@"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。%@ ", WILDBROWSER_HOMEPAGE];
+	NSString *shareText = [NSString stringWithFormat:@"Fake Browser %@ ", FAKEBROWSER_HOMEPAGE];
 
 	TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
 	NSString *tweettxt = [NSString stringWithFormat:shareText, convertedTextView.text];
@@ -646,8 +646,8 @@ NSTimer *loadProductTimer;
 
     NSString *title;
 	NSString *emailBody;
-	title = @"ワイルドコンバーター";
-	emailBody = [NSString stringWithFormat:@"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。<a href=\n\n%@>App Store</a>", WILDBROWSER_HOMEPAGE];
+	title = @"Fake Browser";
+	emailBody = [NSString stringWithFormat:@"Fake Browser <a href=\n\n%@>App Store</a>", FAKEBROWSER_HOMEPAGE];
 
     [picker setSubject:[title stringByAppendingString:@"!"]];
     [picker setMessageBody:emailBody isHTML:YES];
@@ -662,8 +662,8 @@ NSTimer *loadProductTimer;
 
     NSString *title;
 	NSString *emailBody;
-	title = @"ワイルドコンバーター！";
-	emailBody = [NSString stringWithFormat:@"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。<a href=%@>App Store</a><br><br>%@", WILDBROWSER_HOMEPAGE, convertedTextView.text];
+	title = @"Fake Browser";
+	emailBody = [NSString stringWithFormat:@"Fake Browser <a href=%@>App Store</a><br><br>%@", FAKEBROWSER_HOMEPAGE, convertedTextView.text];
 
     [picker setMessageBody:emailBody isHTML:YES];
 

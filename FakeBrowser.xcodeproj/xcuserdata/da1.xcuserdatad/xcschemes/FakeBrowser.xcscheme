@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6F829BF315C0901400385C66"
-               BuildableName = "WildBrowser.app"
-               BlueprintName = "WildBrowser"
-               ReferencedContainer = "container:WildBrowser.xcodeproj">
+               BuildableName = "FakeBrowser.app"
+               BlueprintName = "FakeBrowser"
+               ReferencedContainer = "container:FakeBrowser.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F829BF315C0901400385C66"
-            BuildableName = "WildBrowser.app"
-            BlueprintName = "WildBrowser"
-            ReferencedContainer = "container:WildBrowser.xcodeproj">
+            BuildableName = "FakeBrowser.app"
+            BlueprintName = "FakeBrowser"
+            ReferencedContainer = "container:FakeBrowser.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F829BF315C0901400385C66"
-            BuildableName = "WildBrowser.app"
-            BlueprintName = "WildBrowser"
-            ReferencedContainer = "container:WildBrowser.xcodeproj">
+            BuildableName = "FakeBrowser.app"
+            BlueprintName = "FakeBrowser"
+            ReferencedContainer = "container:FakeBrowser.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F829BF315C0901400385C66"
-            BuildableName = "WildBrowser.app"
-            BlueprintName = "WildBrowser"
-            ReferencedContainer = "container:WildBrowser.xcodeproj">
+            BuildableName = "FakeBrowser.app"
+            BlueprintName = "FakeBrowser"
+            ReferencedContainer = "container:FakeBrowser.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

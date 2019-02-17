@@ -1,6 +1,6 @@
 //
 //  MainViewController.h
-//  WildBrowser
+//  FakeBrowser
 //
 //  Created by Sasaki Daichi on 12/07/26.
 //  Copyright (c) 2012年 Sasaki Daichi. All rights reserved.
