@@ -6,12 +6,12 @@
 //  Copyright (c) 2012年 Sasaki Daichi. All rights reserved.
 //
 
-#import "FlipsideViewController.h"
 #import "MBProgressHUD.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import <AVFoundation/AVFoundation.h>
+#import <StoreKit/StoreKit.h>
 
-@interface MainViewController : UIViewController <FlipsideViewControllerDelegate, MBProgressHUDDelegate, UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, AVAudioPlayerDelegate> {
+@interface MainViewController : UIViewController <MBProgressHUDDelegate, UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, AVAudioPlayerDelegate, SKStoreProductViewControllerDelegate> {
 
 	IBOutlet UIView *titleView;
 	IBOutlet UIView *converterView;
@@ -37,7 +37,8 @@
 -(IBAction) pressedConvertButton:(id)sender;
 -(IBAction) pressedConvertShareButton:(id)sender;
 -(IBAction) pressedClearButton:(id)sender;
--(IBAction)pressedTextShareButton:(id)sender;
 
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController;
 
 @end

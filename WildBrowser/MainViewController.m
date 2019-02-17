@@ -13,6 +13,8 @@
 #import <Twitter/TWTweetComposeViewController.h>
 #import <StoreKit/StoreKit.h>
 
+#define WILDBROWSER_HOMEPAGE @"https://da1ssk.github.io/wildbrowser/index.html"
+
 MBProgressHUD *HUD;
 NSFileManager *fm;
 NSString *docDir;
@@ -121,7 +123,6 @@ extern int nLaunch;
 	[UIView setAnimationDuration:0.5];
 	[UIView setAnimationDelegate:self];
 
-	CGRect r = [[UIScreen mainScreen] bounds];
 	titleView.frame = CGRectMake(0, 0, titleView.frame.size.width, titleView.frame.size.height);
 
 	[UIView commitAnimations];
@@ -146,7 +147,7 @@ extern int nLaunch;
 	}
 
 	// convert
-	int nAry = [dicArray count];
+	int nAry = (int)[dicArray count];
 	for(int i=0; i<nAry; i++){
 		NSArray *dicElem = (NSArray *)[dicArray objectAtIndex:i];
 		NSString *orgStr = (NSString *)[dicElem objectAtIndex:0];
@@ -167,7 +168,7 @@ extern int nLaunch;
 	NSString *text = convertedTextView.text;
 
 	if(NSClassFromString(@"UIActivityViewController")) {
-		NSString *shareText = [NSString stringWithFormat:@"ワイルドコンバーター！ http://ow.ly/ekLe8 %@", text];
+		NSString *shareText = [NSString stringWithFormat:@"ワイルドコンバーター！ %@ %@", WILDBROWSER_HOMEPAGE, text];
 		NSArray *activityItems = @[shareText];
 
 		UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
@@ -221,7 +222,7 @@ extern int nLaunch;
 	NSURL *url;
 	
 	if (isConnected) {
-		url = [NSURL URLWithString:@"https://da1ssk.github.io/wildbrowser/index.html"];
+		url = [NSURL URLWithString:WILDBROWSER_HOMEPAGE];
 	} else {
 		url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"]];
 	}
@@ -294,7 +295,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 		NSString *html = [aWebView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML;"];
 		
 		// convert
-		int nAry = [dicArray count];
+		int nAry = (int)[dicArray count];
 		for(int i=0; i<nAry; i++){
 			NSArray *dicElem = (NSArray *)[dicArray objectAtIndex:i];
 			NSString *orgStr = (NSString *)[dicElem objectAtIndex:0];
@@ -376,7 +377,7 @@ NSTimer *loadProductTimer;
 
 -(IBAction) pressedInfo {
 	Class c = NSClassFromString(@"SKStoreProductViewController");
-	int appId;
+
 	if (c) {
 		HUD = [[MBProgressHUD alloc] initWithView:self.view];
 		[self.view addSubview:HUD];
@@ -428,7 +429,6 @@ NSTimer *loadProductTimer;
 }
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
     [viewController dismissViewControllerAnimated:YES completion:^{
-
 	}];
 }
 
@@ -436,7 +436,7 @@ NSTimer *loadProductTimer;
 
     if (alertView.tag == ALERT_RATE) {
 		if (buttonIndex == 1)
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://ow.ly/ekLe8"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:WILDBROWSER_HOMEPAGE]];
 	}
 }
 
@@ -448,29 +448,12 @@ NSTimer *loadProductTimer;
 	HUD = nil;
 }
 
-
-#pragma mark - Flipside View
-
-- (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller
-{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showAlternate"]) {
-        [[segue destinationViewController] setDelegate:self];
-    }
-}
-
-
 // save a screen capture
 -(IBAction)pressedShareButton:(id)sender {
 	UIImage *image = [self captureView:webView];
 
 	if(NSClassFromString(@"UIActivityViewController")) {
-		NSString *shareText = @"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。http://ow.ly/ekLe8 ";
-//		NSURL *shareURL = [NSURL URLWithString:@"http://ow.ly/ekLe8"];
+		NSString *shareText = [NSString stringWithFormat:@"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。%@ ", WILDBROWSER_HOMEPAGE];
 		NSArray *activityItems = @[image, shareText];
 
 		UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
@@ -512,12 +495,8 @@ NSTimer *loadProductTimer;
     CGRect screenRect = [view bounds];
 
 	CGSize size = screenRect.size;
-	if (UIGraphicsBeginImageContextWithOptions != NULL) {
-		UIGraphicsBeginImageContextWithOptions(size, YES, 0);
-	} else {
-		UIGraphicsBeginImageContext(size);
-	}
-
+	UIGraphicsBeginImageContextWithOptions(size, YES, 0);
+	
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     [view.layer renderInContext:ctx];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -533,8 +512,7 @@ NSTimer *loadProductTimer;
 }
 
 -(void) tweetImage {
-	NSString *shareText = @"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。http://ow.ly/ekLe8";
-//	NSURL *shareURL = [NSURL URLWithString:@"http://ow.ly/ekLe8"];
+	NSString *shareText = [NSString stringWithFormat:@"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。%@ ", WILDBROWSER_HOMEPAGE];
 	
 	TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
 	[tweetViewController setInitialText:[NSString stringWithFormat:shareText]];
@@ -555,7 +533,7 @@ NSTimer *loadProductTimer;
 }
 
 -(void) tweetText{
-	NSString *shareText = @"ワイルドコンバーター！ http://ow.ly/ekLe8 %@";
+	NSString *shareText = [NSString stringWithFormat:@"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。%@ ", WILDBROWSER_HOMEPAGE];
 
 	TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
 	NSString *tweettxt = [NSString stringWithFormat:shareText, convertedTextView.text];
@@ -669,7 +647,7 @@ NSTimer *loadProductTimer;
     NSString *title;
 	NSString *emailBody;
 	title = @"ワイルドコンバーター";
-	emailBody = @"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。<a href=\n\nhttp://ow.ly/ekLe8>App Store</a>";
+	emailBody = [NSString stringWithFormat:@"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。<a href=\n\n%@>App Store</a>", WILDBROWSER_HOMEPAGE];
 
     [picker setSubject:[title stringByAppendingString:@"!"]];
     [picker setMessageBody:emailBody isHTML:YES];
@@ -685,7 +663,7 @@ NSTimer *loadProductTimer;
     NSString *title;
 	NSString *emailBody;
 	title = @"ワイルドコンバーター！";
-	emailBody = [NSString stringWithFormat:@"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。<a href=http://ow.ly/ekLe8>App Store</a><br><br>%@", convertedTextView.text];
+	emailBody = [NSString stringWithFormat:@"ワイルドコンバーターだぜぇ〜。ワイルドだろぉ〜。<a href=%@>App Store</a><br><br>%@", WILDBROWSER_HOMEPAGE, convertedTextView.text];
 
     [picker setMessageBody:emailBody isHTML:YES];
 
@@ -725,7 +703,7 @@ NSTimer *loadProductTimer;
             break;
     }
 
-    [self dismissModalViewControllerAnimated:YES];
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)dealloc
